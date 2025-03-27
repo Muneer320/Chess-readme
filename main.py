@@ -217,6 +217,7 @@ def main(issue, issue_author, repo_owner):
 
 
 if __name__ == '__main__':
+    print(os.getcwd())
     if len(sys.argv) >= 2 and sys.argv[1] == '--self-test':
         selftest.run(main)
         sys.exit(0)
