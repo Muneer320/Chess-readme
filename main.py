@@ -79,6 +79,8 @@ def main(issue, issue_author, repo_owner):
     with open('data/settings.yaml', 'r') as settings_file:
         settings = yaml.load(settings_file, Loader=yaml.FullLoader)
 
+    os.makedirs('games', exist_ok=True)
+
     if action[0] == Action.NEW_GAME:
         if os.path.exists('games/current.pgn') and issue_author != repo_owner:
             issue.create_comment(settings['comments']['invalid_new_game'].format(author=issue_author))
@@ -164,7 +166,6 @@ def main(issue, issue_author, repo_owner):
         return False, 'ERROR: Unknown action'
 
     # Save game to "games/current.pgn"
-    os.makedirs('games', exist_ok=True)
     print(game, file=open('games/current.pgn', 'w'), end='\n\n')
 
     last_moves = markdown.generate_last_moves()
