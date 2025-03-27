@@ -164,6 +164,7 @@ def main(issue, issue_author, repo_owner):
         return False, 'ERROR: Unknown action'
 
     # Save game to "games/current.pgn"
+    os.makedirs('games', exist_ok=True)
     print(game, file=open('games/current.pgn', 'w'), end='\n\n')
 
     last_moves = markdown.generate_last_moves()
@@ -227,5 +228,5 @@ if __name__ == '__main__':
 
     ret, reason = main(issue, issue_author, repo_owner)
 
-    if ret == False:
+    if not ret:
         sys.exit(reason)
